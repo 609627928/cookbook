@@ -11,5 +11,5 @@ require (
 	github.com/labstack/gommon v0.3.0
 	github.com/leodido/go-urn v1.2.0 // indirect
 	golang.org/x/crypto v0.0.0-20200423211502-4bdfaf469ed5
-	gopkg.in/go-playground/validator.v9 v9.31.0 // indirect
+	gopkg.in/go-playground/validator.v9 v9.31.0
 )
