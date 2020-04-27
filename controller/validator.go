@@ -1,4 +1,4 @@
-package router
+package controller
 
 import "gopkg.in/go-playground/validator.v9"
 

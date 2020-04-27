@@ -2,17 +2,16 @@ package main
 
 import (
 	"cookbook/controller"
-	"cookbook/db"
-	"cookbook/router"
+	"cookbook/model"
 	"cookbook/store"
 )
 
 func main() {
-	r := router.New()
+	r := controller.New()
 	routerApi := r.Group("/api")
 
-	d := db.New()
-	db.AutoMigrate(d)
+	d := model.New()
+	model.AutoMigrate(d)
 
 	us := store.NewUserStore(d)
 	ctrl := controller.NewController(us)

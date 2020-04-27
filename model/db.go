@@ -1,7 +1,6 @@
-package db
+package model
 
 import (
-	"cookbook/model"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
@@ -39,6 +38,6 @@ func DropTestDB() error {
 //TODO: err check
 func AutoMigrate(db *gorm.DB) {
 	db.AutoMigrate(
-		&model.User{},
+		&User{},
 	)
 }
