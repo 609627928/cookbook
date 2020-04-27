@@ -8,7 +8,9 @@ import (
 )
 
 func New() *gorm.DB {
-	db, err := gorm.Open("mysql", "peng:0@tcp(127.0.0.1:3306)/cookbook?charset=utf8")
+	//db, err := gorm.Open("mysql", "peng:0@tcp(127.0.0.1:3306)/cookbook?charset=utf8")
+	db, err := gorm.Open("mysql", "peng:0@tcp(127.0.0.1:3306)/cookbook?charset=utf8&parseTime=True&loc=Local")
+
 	if err != nil {
 		fmt.Println("storage err: ", err)
 	}

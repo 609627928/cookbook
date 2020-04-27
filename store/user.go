@@ -28,7 +28,7 @@ func (us *UserStore) GetByID(id uint) (*model.User, error) {
 
 func (us *UserStore) GetByEmail(e string) (*model.User, error) {
 	var m model.User
-	if err := us.db.Where(&model.User{Email: e}).First(&m).Error; err != nil {
+	if err := us.db.Debug().Where(&model.User{Email: e}).First(&m).Error; err != nil {
 		if gorm.IsRecordNotFoundError(err) {
 			return nil, nil
 		}
