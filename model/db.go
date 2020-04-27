@@ -8,15 +8,15 @@ import (
 )
 
 func New() *gorm.DB {
-	//db, err := gorm.Open("mysql", "peng:0@tcp(127.0.0.1:3306)/cookbook?charset=utf8")
-	db, err := gorm.Open("mysql", "peng:0@tcp(127.0.0.1:3306)/cookbook?charset=utf8&parseTime=True&loc=Local")
+	// 为了处理time.Time，需要包括parseTime作为参数
+	db, err := gorm.Open("mysql", "peng:0@tcp(127.0.0.1:3306)/cookbook?charset=utf8&parseTime=True")
 
 	if err != nil {
 		fmt.Println("storage err: ", err)
 	}
-	db.SingularTable(true)
+	db.SingularTable(true) // 全局设置表名不可以为复数形式（表名默认加后缀s）。
 	db.DB().SetMaxIdleConns(3)
-	db.LogMode(true)
+	db.LogMode(true) // 开启debug，打印原生sql
 	return db
 }
 

@@ -14,7 +14,8 @@ func main() {
 	model.AutoMigrate(d)
 
 	us := store.NewUserStore(d)
-	ctrl := controller.NewController(us)
+	fs := store.NewFoodStore(d)
+	ctrl := controller.NewController(us, fs)
 	ctrl.Register(routerApi)
 
 	r.Logger.Fatal(r.Start("127.0.0.1:8080"))

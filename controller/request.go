@@ -46,3 +46,24 @@ func (r *userLoginRequest) bind(c echo.Context) error {
 	}
 	return nil
 }
+
+type foodCreateRequest struct {
+	Food struct {
+		Name  string `json:"name" validate:"required"`
+		Price int64  `json:"price" validate:"required"`
+		Desc  string `json:"desc"`
+	} `json:"food"`
+}
+
+func (r *foodCreateRequest) bind(c echo.Context, f *model.Food) error {
+	if err := c.Bind(r); err != nil {
+		return err
+	}
+	if err := c.Validate(r); err != nil {
+		return err
+	}
+	f.Name = r.Food.Name
+	f.Price = r.Food.Price
+	f.Desc = r.Food.Desc
+	return nil
+}

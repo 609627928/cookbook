@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"cookbook/utils"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
@@ -21,8 +22,24 @@ func New() *echo.Echo {
 }
 
 func (ctrl *Controller) Register(routerApi *echo.Group) {
-	routerUser := routerApi.Group("/user")
-	routerUser.POST("/signup", ctrl.SignUp)
-	routerUser.POST("/login", ctrl.Login)
+	users := routerApi.Group("/user")
+	users.POST("/signup", ctrl.SignUp)
+	users.POST("/login", ctrl.Login)
+
+	foods := routerApi.Group("/food", middleware.JWTWithConfig(
+		middleware.JWTConfig{
+			Skipper: func(c echo.Context) bool {
+				if c.Request().Method == "GET" && c.Path() != "/api/food/feed" {
+					return true
+				}
+				return false
+			},
+			SigningKey: utils.JWTSecret,
+		},
+	))
+	foods.POST("", ctrl.CreateFood)
+	foods.GET("", ctrl.Foods)
+	//foods.PUT("/:fid", ctrl.UpdateFood)
+	//foods.DELETE("/:fid", ctrl.DeleteFood)
 
 }
