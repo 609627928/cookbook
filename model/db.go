@@ -41,5 +41,6 @@ func DropTestDB() error {
 func AutoMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		&User{},
+		&Food{},
 	)
 }

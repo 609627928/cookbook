@@ -35,6 +35,8 @@ func (ctrl *Controller) Register(routerApi *echo.Group) {
 				return false
 			},
 			SigningKey: utils.JWTSecret,
+			//TokenLookup: "query:token", // 规定了token从哪取，默认从header里，且字段名默认为Authorization
+			//AuthScheme:  "",            // 规定了token value前的字段，默认为"Bearer"，与实际token用空格分开
 		},
 	))
 	foods.POST("", ctrl.CreateFood)

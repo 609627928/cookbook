@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"github.com/labstack/echo"
 	"time"
 
@@ -39,4 +40,8 @@ func AccessForbidden() Error {
 	e.Errors = make(map[string]interface{})
 	e.Errors["body"] = "access forbidden"
 	return e
+}
+
+func TypeOf(v interface{}) string {
+	return fmt.Sprintf("%T", v)
 }
