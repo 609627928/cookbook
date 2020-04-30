@@ -29,9 +29,9 @@ func (ctrl *Controller) Register(routerApi *echo.Group) {
 	foods := routerApi.Group("/food", middleware.JWTWithConfig(
 		middleware.JWTConfig{
 			Skipper: func(c echo.Context) bool {
-				if c.Request().Method == "GET" && c.Path() != "/api/food/feed" {
-					return true
-				}
+				//if c.Request().Method == "GET" && c.Path() != "/api/food/feed" {
+				//	return true
+				//}
 				return false
 			},
 			SigningKey: utils.JWTSecret,
@@ -41,7 +41,7 @@ func (ctrl *Controller) Register(routerApi *echo.Group) {
 	))
 	foods.POST("", ctrl.CreateFood)
 	foods.GET("", ctrl.Foods)
-	//foods.PUT("/:fid", ctrl.UpdateFood)
-	//foods.DELETE("/:fid", ctrl.DeleteFood)
+	foods.PUT("/:id", ctrl.UpdateFood)
+	foods.DELETE("/:id", ctrl.DeleteFood)
 
 }
