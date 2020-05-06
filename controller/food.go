@@ -3,7 +3,6 @@ package controller
 import (
 	"cookbook/model"
 	"cookbook/utils"
-	"fmt"
 	"github.com/labstack/echo"
 	"net/http"
 	"strconv"
@@ -35,11 +34,10 @@ func (ctrl *Controller) UpdateFood(c echo.Context) error {
 		return c.JSON(http.StatusNotFound, utils.NotFound())
 	}
 	req := &foodUpdateRequest{}
-	//req.populate(f) // 如果不传，则用原值
+	//req.populate(f) // 为了不传参数时，不将数据库内置空，这里将数据库的值填充至结构体
 	if err := req.bind(c, f); err != nil {
 		return c.JSON(http.StatusUnprocessableEntity, utils.NewError(err))
 	}
-	fmt.Println(req)
 	if err = ctrl.foodStore.UpdateFood(f); err != nil {
 		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
 	}
